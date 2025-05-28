@@ -24,9 +24,6 @@
 * **AI 模型服務**：
     * LocalAI (本地 AI 推論平台，相容 OpenAI API 格式)
     * Docker & Docker Compose (容器化與服務編排)
-* **AI 模型 **：
-    * **文字/多模態分析**：LLaVA 
-    * **圖像生成**：Stable Diffusion 
 
 ## 安裝與啟動教學
 
