@@ -1,0 +1,17 @@
+# .gitignore
+models/*.gguf
+models/*.safetensors
+models/*.ckpt
+
+venv/
+*.venv/
+env/
+.env
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.DS_Store
+*.log

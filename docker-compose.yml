@@ -1,0 +1,32 @@
+
+services:
+  localai:
+    platform: linux/arm64 
+    image: quay.io/go-skynet/local-ai:master
+    ports:
+      - "8081:8080" # 將容器的 8080 連接埠映射到主機的 8080 連接埠
+    volumes:
+      - ./models:/models # 將本地的 models 資料夾掛載到容器的 /models 路徑，存放 AI 模型
+      # 如果您有其他的 LocalAI 配置檔，也可以掛載進去
+      # - ./localai/config.yaml:/etc/localai/config.yaml
+    environment: {}
+    command: "--models-path /models --context-size 700 --threads 4" # 啟動 LocalAI 並指定模型路徑、上下文大小和執行緒數量
+
+  app:
+    build:
+      context: . # Dockerfile 的路徑，這裡指的是當前目錄
+      dockerfile: Dockerfile # 指定 Dockerfile 的名稱
+    ports:
+      - "5001:5000" # 將容器的 5000 連接埠映射到主機的 5000 連接埠 (Flask 預設)
+    volumes:
+      - ./app:/app # 將本地的 app 資料夾掛載到容器的 /app 路徑，方便開發時即時更新程式碼
+    depends_on:
+      - localai # 確保 localai 服務先啟動
+    environment:
+      # 設定 LocalAI API 的位置，讓 Flask 應用程式可以呼叫
+      LOCALAI_API_BASE: "http://localai:8080/v1"
+      # 其他 Flask 相關的環境變數，例如 FLASK_ENV=development
+
+networks:
+  default:
+    driver: bridge

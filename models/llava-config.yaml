@@ -1,0 +1,36 @@
+# ./models/llava-config.yaml
+name: llava-financier # 這個名稱將會是您在 summarizer.py 中使用的 MODEL_NAME
+backend: llama-cpp
+parameters:
+  # model 參數指向的是主要模型檔案，路徑是相對於容器內的 /models 資料夾
+  model: llava-v1.5-7b-Q4_K_M.gguf
+  # mmproj 參數指向多模態投影器檔案
+  mmproj: llava-v1.5-7b-mmproj-model-f16.gguf
+  # top_k: 80 (可選)
+  # top_p: 0.9 (可選)
+  # temperature: 0.7 (可選，但我們在 summarizer.py 中已經設定了)
+context_size: 2048  # LLaVA 模型的上下文長度，您可以根據模型文件或需求調整
+# threads: 4 # 可選，如果未設定，LocalAI 會使用 docker-compose.yml 中的全域設定
+# gpu_layers: 0 # 如果您有 NVIDIA GPU 並且 LocalAI 設定支援，可以設定要卸載到 GPU 的層數 (例如 32)
+# f16: false # Q4_K_M 通常不需要 f16: true
+
+# 提示詞模板對 LLaVA 很重要
+# LocalAI 可能內建了 'llava-1.5' 模板，如果沒有，您可能需要手動定義 jinja 模板
+chat_template: llava-1.5 # 嘗試使用 LocalAI 內建的 LLaVA 1.5 聊天模板
+
+# 您也可以為此模型設定一個特定的提示詞模板 (如果 chat_template: llava-1.5 無法正常運作)
+# 例如 (這只是一個通用範例，LLaVA 的確切模板可能不同):
+# template:
+#   chat: |
+#     {%- for message in messages -%}
+#       {%- if message.role == 'system' -%}
+#         {{ message.content }}
+#       {%- else -%}
+#         {%- if message.role == 'user' -%}
+#     USER: {% if message.image_url %} <image>\n{% endif %}{{ message.content }}
+#     ASSISTANT:
+#         {%- else -%}
+#     {{ message.content }}
+#         {%- endif -%}
+#       {%- endif -%}
+#     {%- endfor -%}
