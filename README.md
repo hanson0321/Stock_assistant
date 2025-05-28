@@ -113,38 +113,10 @@
     * 接著會顯示由 LLaVA 模型生成的「AI 摘要與趨勢解讀」。
     * 如果 Stable Diffusion 模型設定正確且成功運作，下方還會顯示一張由 AI 根據摘要生成的概念圖像。
 
-## 🖼️ 介面預覽 (可選)
 
-## 🛠️ 開發與貢獻 (可選)
 
-* **專案結構**：
-    * `app/`: 包含 Flask 應用程式的主要程式碼。
-        * `static/`: 存放靜態檔案 (如開發者照片、股票圖示)。
-        * `templates/index.html`: 前端 HTML 模板。
-        * `main.py`: Flask 應用程式主邏輯。
-        * `crawler.py`: （目前為模擬的）新聞爬蟲。
-        * `summarizer.py`: 呼叫 LLaVA 模型進行摘要和分析。
-        * `image_generator.py`: 呼叫 Stable Diffusion 模型生成圖像。
-        * `requirements.txt`: Python 依賴列表。
-    * `models/`: **(本地使用，不應上傳到 Git)** 存放 AI 模型檔案 (`.gguf`, `.safetensors`) 及其 YAML 設定檔。
-    * `docker-compose.yml`: Docker Compose 設定檔。
-    * `Dockerfile`: 用於建置 Flask 應用程式的 Docker 映像檔。
-    * `.gitignore`: 指定 Git 應忽略的檔案。
-* 歡迎提出 Issue 或 Pull Request！
+ 📄 授權 (可選)
 
-## 📝 未來展望 (可選)
+本專案採用 [MIT License](LICENSE) 授權。
 
-* 實現真實的網路爬蟲功能，取代模擬資料。
-* 優化 AI 模型的提示詞 (Prompt Engineering) 以提升分析和圖像生成品質。
-* 加入更複雜的「市場情緒預測」或「漲跌趨勢指標」(基於 AI 定性分析)。
-* 持續美化前端介面，提升使用者體驗，例如加入載入動畫。
-* 探索更多 LocalAI 支援的 AI 模型與功能。
-* 考慮整合 Gradio 作為另一種展示方式。
 
-## 📄 授權 (可選)
-
-本專案採用 [MIT License](LICENSE) 授權。 (如果您選擇了 MIT 授權)
-
----
-
-請您將此內容複製到您 GitHub 儲存庫的 `README.md` 檔案中，並根據您的實際情況（例如您的 GitHub 使用者名稱、儲存庫名稱、確切的模型檔案名稱等）進行修改。特別是「安裝與啟動教學」中的模型檔案準備和 YAML 設定部分，務必與您的專案保持一致。
